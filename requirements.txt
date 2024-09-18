@@ -1,0 +1,5 @@
+Flask==3.0.3
+flask_cors==5.0.0
+mediapipe==0.10.15
+numpy==2.1.1
+Pillow==10.4.0
