@@ -3,6 +3,7 @@ from flask_cors import CORS
 import model
 from PIL import Image
 import numpy as np
+import io
 
 
 
@@ -13,14 +14,10 @@ leviosaModel = model.LevioasModel()
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part in the request"}), 400
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
+    file = request.data
 
     try:
-        pil_image = Image.open(file)
+        pil_image = Image.open(io.BytesIO(file))
         res = leviosaModel.predict(numpy_image=np.array(pil_image))
 
         return jsonify({
