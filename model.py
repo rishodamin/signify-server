@@ -8,7 +8,7 @@ from mediapipe.tasks.python import vision
 
 class LevioasModel:
     def __init__(self) -> None:
-        self.base_options = python.BaseOptions(model_asset_path='assets/sign_ml.task')
+        self.base_options = python.BaseOptions(model_asset_path='assets/model.task')
         self.options = vision.GestureRecognizerOptions(base_options=self.base_options)
         self.recognizer = vision.GestureRecognizer.create_from_options(self.options)
 
@@ -19,6 +19,7 @@ class LevioasModel:
         if not (recognition_result.gestures):
             return ''
         top_gesture = recognition_result.gestures[0][0]
+       # print(recognition_result)
         return top_gesture.category_name
         
 
