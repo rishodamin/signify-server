@@ -15,11 +15,11 @@ leviosaModel = model.LevioasModel()
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    data = request.get_json()
-    base64_image = data['image']
+    base64_image = request.json['image']
 
     # Decode Base64 to binary data
     file = base64.b64decode(base64_image)
+
 
     try:
         pil_image = Image.open(io.BytesIO(file))
