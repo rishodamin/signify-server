@@ -1,3 +1,4 @@
+import base64
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import model
@@ -14,7 +15,11 @@ leviosaModel = model.LevioasModel()
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    file = request.data
+    data = request.get_json()
+    base64_image = data['image']
+
+    # Decode Base64 to binary data
+    file = base64.b64decode(base64_image)
 
     try:
         pil_image = Image.open(io.BytesIO(file))
